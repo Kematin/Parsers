@@ -70,10 +70,12 @@ async def get_item(json_data: dict, discount: int):
             steam_price=json_item["pricing"]["default"],
             default_price=json_item["pricing"]["priceBeforeDiscount"],
             price_with_discount=json_item["pricing"]["computed"],
-            discount=discount_item,
+            discount=round(discount_item, 2),
             float=json_item["asset"]["float"],
             pattern=json_item["asset"]["pattern"],
-            csmoney_link=f"https://cs.money/market/buy/?search={name}",
+            csmoney_link=f"https://cs.money/market/buy/?search={name}".replace(
+                " ", "%20"
+            ),
         )
         yield item
 
